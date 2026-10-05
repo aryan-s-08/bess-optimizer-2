@@ -134,7 +134,7 @@ def run_bess_optimization(
 
     for h in HOURS:
         # Energy balance with efficiency losses
-        prob += soc[h+1] == soc[h] + p_c[h]*efficiency - p_d[h]/efficiency
+        prob += soc[h+1] == soc[h] + p_c[h] * efficiency - p_d[h] * (1.0 / efficiency)
         # Mutual exclusion: can't charge and discharge at same hour
         prob += p_c[h] <= b_c[h] * max_power_mw
         prob += p_d[h] <= b_d[h] * DISCHARGE_CAP
